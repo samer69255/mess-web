@@ -112,6 +112,6 @@ function stop() {
 
 
 exports.sendTextMessage = sendTextMessage;
-exports.sendPhotoMessage = sendPhotoMessage;
+exports.sendFileMessage = sendFileMessage;
 exports.stop = stop;
 exports.sendVideo = sendVideo;

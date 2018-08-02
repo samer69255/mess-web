@@ -89,7 +89,7 @@ app.post('/webhook/', function (req, res) {
                 else if (cmd == 'f') sendfile(text,sender);
                 else {
                     delete IDS[sender];
-                    sendTextMessage(sender,'حديث خطأ الرجاء البدء من جديد');
+                    fb.sendTextMessage(sender,'حديث خطأ الرجاء البدء من جديد');
                 }
                     
                 }
@@ -102,7 +102,7 @@ app.post('/webhook/', function (req, res) {
                 {
                     
                     IDS[sender] = {s:'p'};
-                    sendTextMessage(sender,'اكتب عبارة البحث عن الصور');
+                    fb.sendTextMessage(sender,'اكتب عبارة البحث عن الصور');
                 }
             else if (text.indexOf('video') || text.indexOf('youtube') || cmd.indexOf('فيديو') || cmd.indexOf('يوتيوب')) {
                 IDS[sender] ={s:'v'};
@@ -111,7 +111,7 @@ app.post('/webhook/', function (req, res) {
             
             else if (text.indexOf('file') || text.indexOf('ملف')) {
                 IDS[sender] = {s:'f'};
-                sendPhotoMessage(sender,'اكتب لي رابط الملف');
+                fb.sendPhotoMessage(sender,'اكتب لي رابط الملف');
             }
             
            
@@ -119,7 +119,7 @@ app.post('/webhook/', function (req, res) {
             
             
             else {
-                sendTextMessage(sender,getHelp());
+                fb.sendTextMessage(sender,getHelp());
             }
 
 
@@ -221,15 +221,15 @@ function startSendPotos(sender) {
         if (IDS[sender].list.length >= 1)
             {
                 IDS[sender].list.push();
-                sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
+                fb.sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
             }
             
         else {
-            sendTextMessage(sender,'ok');
+            fb.sendTextMessage(sender,'ok');
         }
     }
     
-    sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
+    fb.sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
 }
 
 

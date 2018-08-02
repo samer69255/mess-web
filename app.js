@@ -220,8 +220,9 @@ function startSendPotos(sender) {
         
         if (IDS[sender].plist.length >= 1)
             {
-                IDS[sender].plist.shift();
+                
                 fb.sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
+                IDS[sender].plist.shift();
             }
             
         else {

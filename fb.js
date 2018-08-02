@@ -54,6 +54,7 @@ function sendFileMessage(sender,ob,fn) {
         }
         else if (response.body.error) {
             console.log('Error: ', response.body.error);
+            console.log(ob);
             
         }
         

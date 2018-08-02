@@ -1,0 +1,23 @@
+{
+  "name": "fb-web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "free-google-image-search": "^1.0.0",
+    "g-i-s": "^2.1.2",
+    "google-images": "^2.1.0",
+    "google-search": "0.0.5",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "node-google-image-search": "^1.0.3",
+    "request": "^2.87.0",
+    "youtube-search": "^1.1.1"
+  }
+}

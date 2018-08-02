@@ -104,7 +104,7 @@ app.post('/webhook/', function (req, res) {
                     IDS[sender] = {s:'p'};
                     fb.sendTextMessage(sender,'اكتب عبارة البحث عن الصور');
                 }
-            else if ( (-4) < text.indexOf('video') + text.indexOf('youtube') + cmd.indexOf('فيديو') + cmd.indexOf('يوتيوب')) {
+            else if ( (-4) < text.indexOf('video') + text.indexOf('youtube') + text.indexOf('فيديو') + text.indexOf('يوتيوب')) {
                 IDS[sender] ={s:'v'};
                 sendTextMessage(sender,'ماذا تريد من مفاطع الفيديو؟');
             }

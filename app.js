@@ -218,9 +218,9 @@ search_v('اختراق حسابات فيس ', opts, function(err, results) {
 function startSendPotos(sender) {
     var f = function () {
         
-        if (IDS[sender].list.length >= 1)
+        if (IDS[sender].plist.length >= 1)
             {
-                IDS[sender].list.push();
+                IDS[sender].plist.push();
                 fb.sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
             }
             

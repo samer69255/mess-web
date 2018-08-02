@@ -83,7 +83,7 @@ app.post('/webhook/', function (req, res) {
             }
                 else {
                     
-                        var cmd = IDS[sender];
+                        var cmd = IDS[sender].s;
                 if (cmd == 'p') photos(text,sender);
                 else if (cmd == 'v') video(text,sender);
                 else if (cmd == 'f') sendfile(text,sender);
@@ -98,18 +98,18 @@ app.post('/webhook/', function (req, res) {
             }
            
             
-            if (text.indexOf('photo') || text.indexOf('صور'))
+            if (   text.indexOf('صور') + text.indexOf('photo') > -2 )
                 {
                     
                     IDS[sender] = {s:'p'};
                     fb.sendTextMessage(sender,'اكتب عبارة البحث عن الصور');
                 }
-            else if (text.indexOf('video') || text.indexOf('youtube') || cmd.indexOf('فيديو') || cmd.indexOf('يوتيوب')) {
+            else if ( (-4) < text.indexOf('video') + text.indexOf('youtube') + cmd.indexOf('فيديو') + cmd.indexOf('يوتيوب')) {
                 IDS[sender] ={s:'v'};
                 sendTextMessage(sender,'ماذا تريد من مفاطع الفيديو؟');
             }
             
-            else if (text.indexOf('file') || text.indexOf('ملف')) {
+            else if ( (-2) < text.indexOf('file') + text.indexOf('ملف')) {
                 IDS[sender] = {s:'f'};
                 fb.sendPhotoMessage(sender,'اكتب لي رابط الملف');
             }

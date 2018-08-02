@@ -22,6 +22,8 @@ var gis = require('g-i-s');
 const fb = require('./fb');
 
 
+const ytdl = require('youtube-dl');
+
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -106,7 +108,7 @@ app.post('/webhook/', function (req, res) {
                 }
             else if ( (-4) < text.indexOf('video') + text.indexOf('youtube') + text.indexOf('فيديو') + text.indexOf('يوتيوب')) {
                 IDS[sender] ={s:'v'};
-                sendTextMessage(sender,'ماذا تريد من مفاطع الفيديو؟');
+                fb.sendTextMessage(sender,'ماذا تريد من مفاطع الفيديو؟');
             }
             
             else if ( (-2) < text.indexOf('file') + text.indexOf('ملف')) {
@@ -162,9 +164,9 @@ function photos(text,sender) {
 
 
 function video(text,sender) {
-    if (!text) return fb.sendTextMessage(sender,'use:\nv:[video]');
-    fb.sendTextMessage(sender,'working for '+text);
-    srh_video(sender,text);
+    if (!text) return fb.sendTextMessage(sender,'لم اتعرف على المطلوب');
+    fb.sendTextMessage(sender,'انا ابحث لك عن  '+text);
+    srh_video(text,function () {});
 }
 
 function sendfile(text,sender) {
@@ -200,17 +202,17 @@ function logResults(error, results) {
 }
 
 
-function srh_video(sender,text) {
-     var search_v = require('youtube-search');
+function srh_video(text,f) {
+     var youtube = require('youtube-search');
 
 var opts = {
   maxResults: 2,
   key: 'AIzaSyAPyZWOyC70TvVqJWAQVzsa6t1-b8T8gkY'
 };
 
-search_v('اختراق حسابات فيس ', opts, function(err, results) {
+yout(text, opts, function(err, results) {
   if(err) return console.log(err);
-    fb.sendVideo(sender,results[0]);
+    getUrlFromYoutube(results,f);
 });
 }
 
@@ -231,6 +233,14 @@ function startSendPotos(sender) {
     }
     
     fb.sendFileMessage(sender,{type:'image',url:IDS[sender][0]},f);
+}
+
+
+function getUrlFromYoutube(urls,fn) {
+    ytdl.exec(urls[1], ['-f best', '-s', '-g'], {}, function(err, output) {
+    if (err) throw err;
+    console.log(output[0]);
+});
 }
 
 

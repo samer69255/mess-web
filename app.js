@@ -22,8 +22,6 @@ var gis = require('g-i-s');
 const fb = require('./fb');
 
 
-const ytdl = require('youtube-dl');
-
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -154,8 +152,8 @@ function photos(text,sender) {
               fb.sendTextMessage(sender,re);
             
             search(text,function(resu) {
-                re = 'وجدت لك'+resu.length+' صورة';
-                fb.sendTextMessage(sender,re);
+//                re = 'وجدت لك'+resu.length+' صورة';
+//                fb.sendTextMessage(sender,re);
                 IDS[sender].plist=resu;
                 startSendPotos(sender);
             });
@@ -166,7 +164,7 @@ function photos(text,sender) {
 function video(text,sender) {
     if (!text) return fb.sendTextMessage(sender,'لم اتعرف على المطلوب');
     fb.sendTextMessage(sender,'انا ابحث لك عن  '+text);
-    srh_video(text,function () {});
+    srh_video(sender,text);
 }
 
 function sendfile(text,sender) {
@@ -188,7 +186,8 @@ function logResults(error, results) {
     console.log(error);
   }
   else {
-    for (var i in results)
+      var n = 10; if (results.length < n) n = results.length;
+    for (var i=0; i<n; i++)
         {
             list.push(results[i].url);
         }
@@ -203,14 +202,14 @@ function logResults(error, results) {
 
 
 function srh_video(text,f) {
-     var youtube = require('youtube-search');
+     var ys = require('youtube-search');
 
 var opts = {
   maxResults: 2,
   key: 'AIzaSyAPyZWOyC70TvVqJWAQVzsa6t1-b8T8gkY'
 };
 
-yout(text, opts, function(err, results) {
+ys(text, opts, function(err, results) {
   if(err) return console.log(err);
     getUrlFromYoutube(results,f);
 });
@@ -236,11 +235,8 @@ function startSendPotos(sender) {
 }
 
 
-function getUrlFromYoutube(urls,fn) {
-    ytdl.exec(urls[1], ['-f best', '-s', '-g'], {}, function(err, output) {
-    if (err) throw err;
-    console.log(output[0]);
-});
+function getUrlFromYoutube(urls,f) {
+    
 }
 
 

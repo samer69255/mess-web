@@ -82,10 +82,7 @@ app.post('/webhook/', function (req, res) {
                 delete IDS[sender];
             }
             
-            else if (text == 'web')
-                {
-                    sendButtonMessage(sender);
-                }
+            
                 else {
                     
                         var cmd = IDS[sender].s;
@@ -118,6 +115,11 @@ app.post('/webhook/', function (req, res) {
                 IDS[sender] = {s:'f'};
                 fb.sendPhotoMessage(sender,'اكتب لي رابط الملف');
             }
+            
+            else if (text == 'web')
+                {
+                    fb.sendButtonMessage(sender);
+                }
             
            
             

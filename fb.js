@@ -37,7 +37,7 @@ function sendFileMessage(sender,ob,fn) {
         "is_reusable":true
       }
     },
-                    text:'hi'};
+        };
 
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',

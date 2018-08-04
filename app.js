@@ -193,12 +193,11 @@ function logResults(error, results) {
     console.log(error);
   }
   else {
-      var n = 10;
-    for (var i in results)
-        {
-            list.push(results[i].url);
-            if (i == n) break;
-        }
+      
+    results.forEach(function (ob) {
+        list.push(ob.url);
+    })
+       
       
       fn(list);
   }

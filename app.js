@@ -193,10 +193,11 @@ function logResults(error, results) {
     console.log(error);
   }
   else {
-      var n = 10; if (results.length < n) n = results.length;
-    for (var i=0; i<n; i++)
+      var n = 10;
+    for (var i in results)
         {
             list.push(results[i].url);
+            if (i == n) break;
         }
       
       fn(list);

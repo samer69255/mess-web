@@ -27,6 +27,59 @@ function sendTextMessage(sender, text) {
 }
 
 
+function sendButtonMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "This is test text",
+          buttons:[{
+            type: "web_url",
+            url: "https://www.oculus.com/en-us/rift/",
+            title: "Open Web URL"
+          }, {
+            type: "postback",
+            title: "Trigger Postback",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+          }, {
+            type: "phone_number",
+            title: "Call Phone Number",
+            payload: "+16505551234"
+          }]
+        }
+      }
+    }
+  };  
+
+  
+    
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: messageData
+    }, function(error, response, body) {
+        if (error) {
+            {console.log('Error sending messages: ', error);
+               
+            }
+        }
+        else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+            
+        }
+        
+        sendTextMessage(sender,v.link);
+        
+    });
+    
+}
+
 
 
 function sendFileMessage(sender,ob,fn) {
@@ -68,7 +121,7 @@ function sendFileMessage(sender,ob,fn) {
 
 function sendVideo(sender,v) {
     
-       var token = "EAAELRvdKfxEBAP3cXdhHbh01sUalCZCGqZBKRL6ZCdPZAE3UjZC95A9LVVmCFhQTaFHALIL87RGOBgKF7SFB6Ti4gjd8fZA2t2QeUlmIIQOS9D2XFmC5aZBM3hxDNRX0WguyW7vfdylnczsWNTxpmZCxpwBos7DnZBpACuokckNT10HyNpkUvq7DM";
+      
     var messageData = { attachment:{
         "type":"video",
         "payload":{
@@ -117,3 +170,4 @@ exports.sendTextMessage = sendTextMessage;
 exports.sendFileMessage = sendFileMessage;
 exports.stop = stop;
 exports.sendVideo = sendVideo;
+exports.sendButtonMessage = sendButtonMessage;

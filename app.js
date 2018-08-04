@@ -81,6 +81,11 @@ app.post('/webhook/', function (req, res) {
             else if (text == '-new') {
                 delete IDS[sender];
             }
+            
+            else if (text == 'web')
+                {
+                    sendButtonMessage(sender);
+                }
                 else {
                     
                         var cmd = IDS[sender].s;
@@ -89,7 +94,7 @@ app.post('/webhook/', function (req, res) {
                 else if (cmd == 'f') sendfile(text,sender);
                 else {
                     delete IDS[sender];
-                    fb.sendTextMessage(sender,'حديث خطأ الرجاء البدء من جديد');
+                    fb.sendTextMessage(sender,'حدث خطأ الرجاء البدء من جديد');
                 }
                     
                 }
